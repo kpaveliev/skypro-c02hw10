@@ -1,4 +1,4 @@
-class Candidate():
+class Candidate:
 
     def __init__(self, id, name, picture, position, gender, age, skills):
         self.id = id

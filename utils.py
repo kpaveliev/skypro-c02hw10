@@ -1,5 +1,5 @@
 import json
-import class_
+from class_ import Candidate
 
 # Importing candiates dictionary and assigning to class
 def assign_class(filename):
@@ -11,14 +11,7 @@ def assign_class(filename):
     candidates = []
 
     for i in range(len(candidates_list)):
-        candidates.append(class_.Candidate(candidates_list[i]['id'],
-                                    candidates_list[i]['name'],
-                                    candidates_list[i]['picture'],
-                                    candidates_list[i]['position'],
-                                    candidates_list[i]['gender'],
-                                    candidates_list[i]['age'],
-                                    candidates_list[i]['skills']
-                                    ))
+        candidates.append(Candidate(**candidates_list[i]))
 
     return candidates
 

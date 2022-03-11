@@ -1,16 +1,16 @@
 from flask import Flask
-import utils
+from utils import assign_class
 
 # Import candidates dictionary and assign elements to a class
-candidates = utils.assign_class('candidates.json')
+candidates = assign_class('candidates.json')
 
-# Starting Flask
+# Start Flask
 app = Flask(__name__)
 
 # Main page - candidates list
 @app.route("/")
 def page_index():
-    text = chr(10).join([candidates[i].print_candidate()
+    text = '\n'.join([candidates[i].print_candidate()
                          for i in range(len(candidates))])
     return f'<h1>Список кандидатов</h1>'\
            f'<pre>{text}</pre>'
@@ -24,12 +24,11 @@ def page_candidate(id):
 # Skill search page
 @app.route("/skill/<skill_name>")
 def page_skill(skill_name):
-    text = chr(10).join([candidates[i].print_candidate()
+    text = '\n'.join([candidates[i].print_candidate()
                          for i in range(len(candidates))
-                         if skill_name in candidates[i].skills.lower()])
+                         if skill_name in candidates[i].skills.lower().split(", ")])
     return f'<h1>Список кандидатов c навыком {skill_name}</h1>'\
            f'<pre>{text}</pre>'
 
 if __name__ == '__main__':
     app.run()
-
